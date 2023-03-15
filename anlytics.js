@@ -5,9 +5,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let tabel = document.getElementById("statistic");
     let searchData = document.getElementById("search-value");
     let searchingBtn = document.getElementById("finding");
-    
 
-    function getWords(){
+    function getWords() {
         let text = (textInput.value).trim();
         let punctuationless = text.replace(/[.,"\/#!$%\^&\*;:+{}=\-_`~()0-9\n]/g," ");
         let finalString = punctuationless.replace(/ +/g, ' ').trim();
@@ -15,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return words;
     }
 
-    function howMuchTimesWordAppears(textArray){
+    function howMuchTimesWordAppears(textArray) {
         const wordCounts = new Map()
         textArray.forEach(word => {
             const currentWordCount = wordCounts.get(word.toLowerCase()) || 0
@@ -24,14 +23,11 @@ document.addEventListener('DOMContentLoaded', () => {
           
           return  wordCounts
     }
-
-
     
     let lastResFind=""; 
     let copy_page = textInput.value; 
     
-    function findOnPage(){
-        
+    function findOnPage() {
         let textToFind = searchData.value;
         
         if (textToFind == "") {
@@ -39,19 +35,16 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
         
-        if(textOutput.innerHTML.indexOf(textToFind)=="-1")
+        if (textOutput.innerHTML.indexOf(textToFind) == "-1")
         alert("Ничего не найдено, проверьте правильность ввода!");
         
-        if(copy_page.length > 0) textOutput.innerHTML=copy_page;
+        if (copy_page.length > 0) textOutput.innerHTML = copy_page;
         else copy_page=textOutput.innerHTML;
 
         textOutput.innerHTML = textOutput.innerHTML.replace(eval("/name="+lastResFind+"/gi")," ");
         textOutput.innerHTML = textOutput.innerHTML.replace(eval("/"+textToFind+"/gi"),"<span name="+textToFind+" style='background:yellow'>"+textToFind+"</span>");
         lastResFind = textToFind;
     }
-
-
-
 
     let arrayWords = getWords();
     let statistic = howMuchTimesWordAppears(arrayWords);
@@ -61,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     textOutput.innerHTML = textInput.value;
 
-    for( let i = 0; i < resultWords.length; i++ ){
+    for (let i = 0; i < resultWords.length; i++) {
         let option = document.createElement("option");
         let tr = document.createElement("tr");
         let tdWord = document.createElement("td");
@@ -77,8 +70,5 @@ document.addEventListener('DOMContentLoaded', () => {
         options.appendChild(option);
     }
 
-    searchingBtn.addEventListener("click", findOnPage)
-
-   
-    
+    searchingBtn.addEventListener("click", findOnPage) 
 })
